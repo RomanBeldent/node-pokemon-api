@@ -15,6 +15,11 @@ app
 
 app.get('/', (req, res) => res.send('Hello, Express nodemon!'));
 
+app.get('/api/pokemons', (req, res) => {
+    const message = `Voici tous les pokémons du pokédex, il y en a actuellement ${pokemons.length} !`
+    res.json(success(message, pokemons));
+})
+
 app.get('/api/pokemons/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const pokemon = pokemons.find(pokemon => pokemon.id === id);
@@ -22,10 +27,6 @@ app.get('/api/pokemons/:id', (req, res) => {
     res.json(success(message, pokemon));
 })
 
-app.get('/api/pokemons', (req, res) => {
-    const message = `Voici tous les pokémons du pokédex, il y en a actuellement ${pokemons.length} !`
-    res.json(success(message, pokemons));
-})
 
 app.post('/api/pokemons', (req, res) => {
     const id = getUniqueId(pokemons);
@@ -48,7 +49,7 @@ app.put('/api/pokemons/:id', (req, res) => {
 app.delete('/api/pokemons/:id', (req, res) => {
     const id = parseInt(req.params.id);
     const pokemonDeleted = pokemons.find(pokemon => pokemon.id === id);
-    pokemons.filter(pokemon => pokemon.id !== id);
+    pokemons = pokemons.filter(pokemon => pokemon.id !== id);
     const message = `Le Pokémon ${pokemonDeleted.name} a bien été supprimé.`;
     res.json(success(message, pokemonDeleted));
 })
