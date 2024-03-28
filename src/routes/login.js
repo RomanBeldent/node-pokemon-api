@@ -1,7 +1,7 @@
 /* Authentification : Créer un modèle User avec Sequelize */
 const { User } = require('../db/sequelize')
 const bcrypt = require('bcrypt')
-const jwt = require('webjsontoken')
+const jwt = require('jsonwebtoken')
 const privateKey = require('../auth/private_key')
 
 module.exports = (app) => {
