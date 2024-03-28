@@ -5,6 +5,8 @@ module.exports = (app) => {
   app.get('/api/pokemons', (req, res) => {
     if (req.query.name) {
       const name = req.query.name
+      const limit = parseInt(req.query.limit) || 5
+      
       return Pokemon.findAndCountAll({
         where: {
           name: { // 'name' est la propriété du modèle pokémon
@@ -12,7 +14,7 @@ module.exports = (app) => {
           }
         },
         order: ['name'],
-        limit: 5
+        limit: limit
       })
         .then(({ count, rows }) => {
           const message = `Il y a ${count} pokémons qui correspondent au terme de recherche ${name}.`
