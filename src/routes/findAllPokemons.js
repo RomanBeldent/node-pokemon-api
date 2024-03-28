@@ -6,7 +6,12 @@ module.exports = (app) => {
     if (req.query.name) {
       const name = req.query.name
       const limit = parseInt(req.query.limit) || 5
-      
+
+      if (name.length < 2) {
+        const message = `Le terme de recherche doit contenir au minumum 2 caractères.`
+        return res.status(400).json({ message })
+      }
+
       return Pokemon.findAndCountAll({
         where: {
           name: { // 'name' est la propriété du modèle pokémon
