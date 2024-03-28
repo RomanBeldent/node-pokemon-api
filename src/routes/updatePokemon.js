@@ -1,5 +1,4 @@
 const { Pokemon } = require('../db/sequelize')
-const { Op } = require('sequelize')
 
 module.exports = (app) => {
   app.put('/api/pokemons/:id', (req, res) => {
